@@ -10,7 +10,7 @@ router.get("/", withAuth, (req, res) => {
     })
       .then(dbPostData => {
         const posts = dbPostData.map((post) => post.get({ plain: true }));
-
+        
         res.render("all-posts-admin", {
           layout: "dashboard",
           posts
@@ -27,13 +27,13 @@ router.get("/", withAuth, (req, res) => {
       layout: "dashboard"
     });
   });
-
+  
   router.get("/edit/:id", withAuth, (req, res) => {
     Post.findByPk(req.params.id)
       .then(dbPostData => {
         if (dbPostData) {
           const post = dbPostData.get({ plain: true });
-
+          
           res.render("edit-post", {
             layout: "dashboard",
             post
@@ -46,5 +46,5 @@ router.get("/", withAuth, (req, res) => {
         res.status(500).json(err);
       });
   });
-
-module.exports = router; 
+  
+module.exports = router;
